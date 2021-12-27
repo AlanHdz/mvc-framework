@@ -2,18 +2,26 @@
 
 namespace App\Core;
 
+use Illuminate\Database\Capsule\Manager as Capsule;
+
 class Database
 {
 
-    public \PDO $pdo;
+    public Capsule $capsule;
 
     public function __construct(array $config) 
     {
-        $dsn = $config['dsn'] ?? '';
-        $user = $config['user'] ?? '';
-        $password = $config['password'] ?? '';
-        $this->pdo = new \PDO($dsn, $user, $password);
-        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->capsule = new Capsule;
+        $this->capsule->addConnection([
+            'driver' => $config['driver'],
+            'host' => $config['host'],
+            'database' => $config['database'],
+            'username' => $config['user'],
+            'password' => $config['password'],
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => ''
+        ]);
     }
 
     public function applyMigrations()
@@ -34,7 +42,7 @@ class Database
             $className = pathinfo($migration, PATHINFO_FILENAME);
             $instance = new $className();
             $this->log("Applying migration $migration");
-            $instance->up();
+            $instance->up($this->capsule);
             $this->log("Applied migration $migration");
             $newMigrations[] = $migration;
         }
@@ -48,29 +56,27 @@ class Database
 
     public function createMigrationsTable()
     {
-        $this->pdo->exec("
-            CREATE TABLE IF NOT EXISTS migrations(
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                migration varchar(255),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            ) ENGINE=INNODB;");
+        if (!$this->capsule::schema()->hasTable('migrations')) {
+            $this->capsule::schema()->create('migrations', function ($table) {
+                $table->increments('id');
+                $table->string('migration')->unique();
+                $table->timestamps();
+            });
+        }
     }
 
     public function getAppliedMigrations()
     {
-        $statement = $this->pdo->prepare("SELECT migration FROM migrations");
-        $statement->execute();
-
-        return $statement->fetchAll(\PDO::FETCH_COLUMN);
+        $migrations = $this->capsule::table('migrations')
+            ->select("migration")->pluck('migration')->toArray();
+        return $migrations;
     }
 
     public function saveMigrations(array $migrations)
     {
-        $str = implode(",",array_map(fn($m) => "('$m')", $migrations));
-        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES 
-            $str
-        ");
-        $statement->execute();
+        for ($i=0; $i < count($migrations); $i++) { 
+            $this->capsule::insert("INSERT INTO migrations (migration) VALUES (?)", [$migrations[$i]]);
+        }
     }
 
     protected function log($message)
