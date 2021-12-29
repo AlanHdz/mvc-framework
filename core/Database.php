@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Database
@@ -22,6 +24,9 @@ class Database
             'collation' => 'utf8_unicode_ci',
             'prefix' => ''
         ]);
+        $this->capsule->setEventDispatcher(new Dispatcher(new Container));
+        $this->capsule->setAsGlobal();
+        $this->capsule->bootEloquent();
     }
 
     public function applyMigrations()

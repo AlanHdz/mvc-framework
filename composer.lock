@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6bef2801e4e9321dbd5a12e050e9fb4",
+    "content-hash": "0e5587c691cce0d588e19483168d2187",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -996,6 +996,59 @@
             "time": "2021-12-04T23:24:31+00:00"
         },
         {
+            "name": "progsmile/request-validator",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/progsmile/request-validator.git",
+                "reference": "73377532d91fbb8cb8e0a40892e30868491d88a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/progsmile/request-validator/zipball/73377532d91fbb8cb8e0a40892e30868491d88a3",
+                "reference": "73377532d91fbb8cb8e0a40892e30868491d88a3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.4",
+                "respect/validation": "1.0.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Progsmile\\Validator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Denys Klymenko",
+                    "email": "denis.klimenko.dx@gmail.com"
+                }
+            ],
+            "description": "Simple PHP Request Validator",
+            "keywords": [
+                "form",
+                "modeling",
+                "php",
+                "sanitization",
+                "security",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/progsmile/request-validator/issues",
+                "source": "https://github.com/progsmile/request-validator/tree/2.0.0"
+            },
+            "time": "2020-05-24T06:22:15+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "1.1.2",
             "source": {
@@ -1093,6 +1146,73 @@
                 "source": "https://github.com/php-fig/simple-cache/tree/master"
             },
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "respect/validation",
+            "version": "1.0.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Validation.git",
+                "reference": "c931e2504b63d8c6431c105a7f4af4eed91b51f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/c931e2504b63d8c6431c105a7f4af4eed91b51f9",
+                "reference": "c931e2504b63d8c6431c105a7f4af4eed91b51f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "symfony/polyfill-mbstring": "^1.2"
+            },
+            "require-dev": {
+                "egulias/email-validator": "~1.2",
+                "mikey179/vfsstream": "^1.5",
+                "phpunit/phpunit": "~4.0",
+                "symfony/validator": "~2.6.9",
+                "zendframework/zend-validator": "~2.3"
+            },
+            "suggest": {
+                "egulias/email-validator": "Strict (RFC compliant) email validation",
+                "ext-bcmath": "Arbitrary Precision Mathematics",
+                "ext-mbstring": "Multibyte String Functions",
+                "fabpot/php-cs-fixer": "Fix PSR2 and other coding style issues",
+                "symfony/validator": "Use Symfony validator through Respect\\Validation",
+                "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\Validation\\": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Respect/Validation Contributors",
+                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                }
+            ],
+            "description": "The most awesome validation engine ever created for PHP",
+            "homepage": "http://respect.li",
+            "keywords": [
+                "respect",
+                "validation",
+                "validator"
+            ],
+            "support": {
+                "issues": "https://github.com/Respect/Validation/issues",
+                "source": "https://github.com/Respect/Validation/tree/1.0"
+            },
+            "time": "2018-01-02T21:24:43+00:00"
         },
         {
             "name": "symfony/console",

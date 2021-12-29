@@ -18,9 +18,9 @@ class SiteController extends Controller
         return $this->render('home', $params);
     }
 
-    public function contact()
+    public function index()
     {
-        return $this->render('contact');
+        return $this->render('index');
     }
 
     public function handleContact(Request $request)
