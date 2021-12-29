@@ -1,0 +1,20 @@
+{
+    "name": "alanhedz/frame",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "AlanHedz",
+            "email": "alan.herjuarez97@gmail.com"
+        }
+    ],
+    "require": {
+        "jenssegers/blade": "^1.4",
+        "vlucas/phpdotenv": "^5.4",
+        "illuminate/database": "^8.77",
+        "progsmile/request-validator": "^2.0"
+    }
+}
